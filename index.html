@@ -1,0 +1,1760 @@
+<!--
+  brewns — Specialty Coffee House in San Francisco
+  
+  Author: Anastasiya Ivanova
+  Created: 2026
+  Repository: github.com/Anastasiya145/coffee-site
+  
+  A beautifully crafted website for a specialty coffee house with smooth animations,
+  interactive menu, and locations showcase.
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>brewns — Specialty Coffee House in San Francisco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700&family=Onest:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ====== FONT FACES ====== */
+      @font-face {
+        font-family: "Space Mono";
+        src: url("https://storage.getlayers.ai/assets/brewns-b9f02b6657/fonts/SpaceMono-Regular.ttf")
+          format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Allura";
+        src: url("https://storage.getlayers.ai/assets/brewns-b9f02b6657/fonts/Allura-Regular.ttf")
+          format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* ====== CSS VARIABLES & TOKENS ====== */
+      :root {
+        --raw-color-white: #ffffff;
+        --raw-color-neutral-100: #ededed;
+        --raw-color-neutral-900: #171717;
+        --raw-color-neutral-950: #0a0a0a;
+        --raw-duration-fast: 150ms;
+        --raw-duration-normal: 250ms;
+        --raw-duration-slow: 300ms;
+
+        /* Brand colors */
+        --raw-color-espresso-950: #070707;
+        --raw-color-amber-500: #d58c3d;
+        --raw-color-espresso-900: #171715;
+        --raw-color-espresso-900-half: rgba(23, 23, 21, 0.5);
+        --raw-color-roast-900: #2a1a0f;
+        --raw-color-roast-500: #b07a45;
+        --raw-color-bone-50: #f1f1ef;
+        --raw-color-bone-100: #e7e5e3;
+
+        /* Gradients */
+        --raw-gradient-hero-scrim: linear-gradient(
+          to right,
+          rgba(7, 7, 7, 0.75) 0%,
+          rgba(7, 7, 7, 0.35) 35%,
+          transparent 60%
+        );
+
+        --raw-gradient-philosophy-scrim: linear-gradient(
+          to bottom,
+          rgba(7, 7, 7, 0.86) 0%,
+          rgba(7, 7, 7, 0.6) 26%,
+          rgba(7, 7, 7, 0.38) 46%,
+          rgba(7, 7, 7, 0.62) 72%,
+          rgba(7, 7, 7, 0.88) 100%
+        );
+
+        --raw-gradient-opalesce-fallback: linear-gradient(
+          120deg,
+          #070707 0%,
+          #110b07 35%,
+          #2c1a11 65%,
+          #6e3e22 100%
+        );
+
+        /* Type scale */
+        --raw-font-size-label: 0.875rem;
+        --raw-font-size-base: 1rem;
+        --raw-font-size-script: 5.625rem;
+        --raw-font-size-fine: 0.75rem;
+        --raw-font-size-headline: 4rem;
+        --raw-font-size-display: 6.25rem;
+        --raw-font-size-display-phone: 2.375rem;
+        --raw-font-size-display-hero-phone: 3.25rem;
+        --raw-font-size-display-tablet: 4rem;
+        --raw-font-size-headline-phone: 2rem;
+        --raw-font-size-headline-tablet: 3rem;
+        --raw-font-size-script-phone: 3.85rem;
+        --raw-font-size-script-tablet: 7rem;
+        --raw-font-size-display-hero-tablet: 6rem;
+        --raw-font-size-count-phone: 5rem;
+        --raw-font-size-count-tablet: 8rem;
+        --raw-font-size-count: 11rem;
+        --raw-font-size-lede-tablet: 1.125rem;
+
+        /* Leading */
+        --raw-leading-flush: 0.8;
+        --raw-leading-headline: 0.9;
+        --raw-leading-copy: 1.2;
+
+        /* Tracking */
+        --raw-tracking-tight: -0.03em;
+        --raw-tracking-label: 0.1em;
+        --raw-tracking-slash: -0.23em;
+        --raw-tracking-slash-space: -0.115em;
+
+        /* Sizes */
+        --raw-size-hero-copy: 30.4375rem;
+        --raw-size-hero-cta: 9.3125rem;
+        --raw-size-hours: 7.625rem;
+        --raw-size-hero-address: 9.9375rem;
+        --raw-size-hero-social: 5.3125rem;
+        --raw-size-hero-rule: 2.375rem;
+        --raw-size-dot: 0.3125rem;
+        --raw-size-logo-width: 6.4931rem;
+        --raw-size-logo-height: 1.375rem;
+        --raw-size-hero-media-width: 72.0625rem;
+        --raw-size-hero-media-height: 61rem;
+        --raw-size-hero-media-x: 24.0625rem;
+        --raw-size-hero-media-overhang: 6.125rem;
+        --raw-size-hero-media-nudge: max(0px, min(40px, calc((1280px - 100vw) * 0.15625)));
+        --raw-size-hero-media-y: 1.8125rem;
+        --raw-size-swirl-width: 139.6875rem;
+        --raw-size-swirl-height: 46.5625rem;
+        --raw-size-swirl-x: 8.25rem;
+        --raw-size-swirl-y: -1.5rem;
+        --raw-size-hero-copy-tablet: 42rem;
+        --raw-size-hero-script-x-phone: 9.75rem;
+        --raw-size-hero-script-y-phone: 5.25rem;
+        --raw-size-hero-script-x-tablet: 16.25rem;
+        --raw-size-hero-script-y-tablet: 7.8125rem;
+        --raw-size-hero-script-x: 17.375rem;
+        --raw-size-hero-script-y: 13.1875rem;
+        --raw-size-hero-copy-rise: 1.75rem;
+        --raw-size-underline: 0.1125rem;
+        --raw-size-cap-16: 0.6875rem;
+        --raw-size-cta-block: 1.1875rem;
+        --raw-size-cap-12: 0.5rem;
+        --raw-size-board-height: 50rem;
+        --raw-size-footer-height: 24.0625rem;
+        --raw-size-menu-intro: 600px;
+        --raw-size-locations-dial: 400px;
+        --letter-spacing-label: var(--raw-tracking-label);
+
+        /* Derived vars */
+        --background: var(--raw-color-espresso-950);
+        --foreground: var(--raw-color-white);
+        --accent: var(--raw-color-amber-500);
+        --coffee-deep: var(--raw-color-roast-900);
+        --coffee-crema: var(--raw-color-roast-500);
+        --surface-backdrop: var(--raw-color-espresso-900);
+        --surface-backdrop-soft: var(--raw-color-espresso-900-half);
+        --hero-scrim: var(--raw-gradient-hero-scrim);
+        --gradient-opalesce-fallback: var(--raw-gradient-opalesce-fallback);
+        --philosophy-scrim: var(--raw-gradient-philosophy-scrim);
+        --surface-inverse: var(--raw-color-bone-50);
+        --surface-inverse-backdrop: var(--raw-color-bone-100);
+        --foreground-inverse: var(--raw-color-espresso-950);
+        --duration-fast: var(--raw-duration-fast);
+        --duration-normal: var(--raw-duration-normal);
+        --duration-slow: var(--raw-duration-slow);
+        --font-size-label: var(--raw-font-size-label);
+        --font-size-base: var(--raw-font-size-base);
+        --font-size-display: var(--raw-font-size-display);
+        --font-size-headline: var(--raw-font-size-headline);
+        --line-height-headline: var(--raw-leading-headline);
+        --letter-spacing-tight: var(--raw-tracking-tight);
+        --ease-entrance: cubic-bezier(0.2, 0, 0, 1);
+        --leading-display: 1.1;
+        --breakpoint-board: 90rem;
+
+        /* Font families */
+        --font-geist: "Geist", system-ui, sans-serif;
+        --font-onest: "Onest", system-ui, sans-serif;
+        --font-space-mono: "Space Mono", ui-monospace, monospace;
+        --font-allura: "Allura", cursive;
+      }
+
+      /* ====== ROOT FONT SIZE SCALING ====== */
+      html {
+        font-size: 16px;
+      }
+
+      @media (max-width: 1439.98px) {
+        html {
+          font-size: calc(16px - (1440px - 100vw) / 128.57);
+        }
+      }
+
+      @media (max-width: 1023.98px) {
+        html {
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 639.98px) {
+        html {
+          font-size: 4.444444vw;
+        }
+      }
+
+      /* ====== BASE STYLES ====== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html.lenis,
+      html.lenis body {
+        height: auto;
+      }
+
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--foreground);
+        min-height: 100lvh;
+        width: 100%;
+        overflow-x: hidden;
+        font-family: var(--font-geist);
+      }
+
+      /* ====== SECTION STYLES ====== */
+      section {
+        position: relative;
+        min-height: 50rem;
+        overflow: hidden;
+      }
+
+      section[data-header-theme="dark"] {
+        background: var(--background);
+        color: var(--foreground);
+      }
+
+      section[data-header-theme="light"] {
+        background: var(--surface-inverse);
+        color: var(--foreground-inverse);
+      }
+
+      /* ====== HERO SECTION ====== */
+      #hero {
+        height: 100lvh;
+        background:
+          linear-gradient(rgba(7, 7, 7, 0), rgba(7, 7, 7, 0)), var(--raw-gradient-opalesce-fallback);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 8rem 2rem 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      #hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--hero-scrim);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 3;
+        max-width: var(--raw-size-hero-copy);
+      }
+
+      .hero-eyebrow {
+        font-family: var(--font-space-mono);
+        font-size: var(--font-size-label);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1rem;
+      }
+
+      .hero-headline {
+        font-family: var(--font-geist);
+        font-size: var(--raw-font-size-display);
+        font-weight: 700;
+        line-height: var(--line-height-headline);
+        letter-spacing: var(--letter-spacing-tight);
+        text-transform: uppercase;
+        margin: 0 0 1.5rem 0;
+      }
+
+      .hero-lede {
+        font-family: var(--font-geist);
+        font-size: var(--font-size-base);
+        line-height: var(--raw-leading-copy);
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        font-family: var(--font-geist);
+        font-size: var(--font-size-label);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+        padding: 1rem 1.5rem;
+        background: transparent;
+        border: 1px solid var(--foreground);
+        color: var(--foreground);
+        cursor: pointer;
+        transition: all 150ms var(--ease-entrance);
+        text-decoration: none;
+      }
+
+      .hero-cta:hover {
+        background: var(--foreground);
+        color: var(--background);
+      }
+
+      .hero-info {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        gap: 2rem;
+        font-family: var(--font-space-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+      }
+
+      .hero-info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .hero-product-frame {
+        position: absolute;
+        right: var(--raw-size-hero-media-x);
+        top: var(--raw-size-hero-media-y);
+        width: var(--raw-size-hero-media-width);
+        height: var(--raw-size-hero-media-height);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      /* ====== MENU SECTION ====== */
+      #menu {
+        display: flex;
+        flex-direction: column;
+        padding: 4rem 2rem;
+      }
+
+      .menu-intro {
+        max-width: var(--raw-size-menu-intro);
+        margin-bottom: 2rem;
+      }
+
+      .menu-heading {
+        font-family: var(--font-geist);
+        font-size: var(--raw-font-size-headline);
+        font-weight: 700;
+        line-height: var(--line-height-headline);
+        text-transform: uppercase;
+        margin: 0 0 1rem 0;
+      }
+
+      .menu-lede {
+        font-family: var(--font-geist);
+        font-size: var(--font-size-base);
+        line-height: var(--raw-leading-copy);
+        color: rgba(23, 23, 21, 0.8);
+      }
+
+      .menu-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .menu-card {
+        background: rgba(23, 23, 21, 0.05);
+        border-radius: 4px;
+        overflow: hidden;
+        transition: transform 150ms var(--ease-entrance);
+        cursor: pointer;
+        perspective: 1000px;
+      }
+
+      .menu-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .menu-card.leaning {
+        transform: rotateX(var(--lean-x, 0deg)) rotateY(var(--lean-y, 0deg)) translateY(-4px);
+        transition: none;
+      }
+
+      .menu-card-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #e7e5e3, #f1f1ef);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-space-mono);
+        font-size: 0.75rem;
+        color: rgba(23, 23, 21, 0.5);
+      }
+
+      .menu-card-content {
+        padding: 1.5rem;
+      }
+
+      .menu-card-label {
+        font-family: var(--font-space-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+        color: rgba(23, 23, 21, 0.6);
+        margin-bottom: 0.5rem;
+      }
+
+      .menu-card-name {
+        font-family: var(--font-geist);
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .menu-card-price {
+        font-family: var(--font-space-mono);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .menu-card-details {
+        font-family: var(--font-space-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+        color: rgba(23, 23, 21, 0.6);
+        margin-top: 0.5rem;
+      }
+
+      /* ====== LOCATIONS SECTION ====== */
+      #locations {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 2rem;
+        gap: 3rem;
+      }
+
+      .locations-heading {
+        font-family: var(--font-geist);
+        font-size: var(--raw-font-size-headline);
+        font-weight: 700;
+        line-height: var(--line-height-headline);
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .locations-dial {
+        width: 100%;
+        max-width: var(--raw-size-locations-dial);
+        height: 400px;
+        background: rgba(23, 23, 21, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+      }
+
+      .locations-info {
+        text-align: center;
+        max-width: 600px;
+      }
+
+      .locations-list {
+        font-family: var(--font-space-mono);
+        font-size: 0.875rem;
+        line-height: 1.8;
+      }
+
+      .location-item {
+        margin-bottom: 1rem;
+      }
+
+      /* ====== PHILOSOPHY SECTION ====== */
+      #philosophy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem 2rem;
+        background:
+          linear-gradient(rgba(7, 7, 7, 0), rgba(7, 7, 7, 0)), var(--raw-gradient-opalesce-fallback);
+        position: relative;
+      }
+
+      #philosophy::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--philosophy-scrim);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .philosophy-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+      }
+
+      .philosophy-headline {
+        font-family: var(--font-geist);
+        font-size: var(--raw-font-size-headline);
+        font-weight: 700;
+        line-height: var(--line-height-headline);
+        text-transform: uppercase;
+        margin: 0 0 2rem 0;
+      }
+
+      .philosophy-lede {
+        font-family: var(--font-geist);
+        font-size: var(--font-size-base);
+        line-height: var(--raw-leading-copy);
+        margin-bottom: 1.5rem;
+      }
+
+      .philosophy-claims {
+        font-family: var(--font-geist);
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.4;
+      }
+
+      /* ====== ORDER SECTION ====== */
+      #order {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 2rem;
+        min-height: auto;
+      }
+
+      .order-content {
+        text-align: center;
+      }
+
+      .order-headline {
+        font-family: var(--font-geist);
+        font-size: var(--raw-font-size-headline);
+        font-weight: 700;
+        line-height: var(--line-height-headline);
+        text-transform: uppercase;
+        margin: 0 0 1rem 0;
+      }
+
+      .order-note {
+        font-family: var(--font-geist);
+        font-size: var(--font-size-base);
+        line-height: var(--raw-leading-copy);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2rem;
+      }
+
+      .order-cta {
+        display: inline-block;
+        font-family: var(--font-geist);
+        font-size: var(--font-size-label);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+        padding: 1rem 1.5rem;
+        background: var(--accent);
+        color: var(--background);
+        cursor: pointer;
+        border: none;
+        transition: all 150ms var(--ease-entrance);
+        text-decoration: none;
+        border-radius: 2px;
+      }
+
+      .order-cta:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+
+      /* ====== FOOTER ====== */
+      footer {
+        background: var(--background);
+        color: var(--foreground);
+        padding: 3rem 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: var(--font-space-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-label);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-column h3 {
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: var(--letter-spacing-label);
+      }
+
+      .footer-column a {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--foreground);
+        text-decoration: none;
+        transition: color 150ms var(--ease-entrance);
+      }
+
+      .footer-column a:hover {
+        color: var(--accent);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-copyright {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* ====== HEADER ====== */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3.5rem;
+        background: rgba(7, 7, 7, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: color 150ms var(--ease-entrance);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      header.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .header-logo {
+        font-family: var(--font-geist);
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+      }
+
+      .header-nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .header-nav a {
+        font-family: var(--font-space-mono);
+        font-size: 0.875rem;
+        text-decoration: none;
+        color: inherit;
+        transition: color 150ms var(--ease-entrance);
+      }
+
+      .header-nav a:hover {
+        color: var(--accent);
+      }
+
+      /* ====== PRELOADER ====== */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 200;
+        background: var(--background);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        opacity: 1;
+        transition: opacity 600ms ease-out;
+      }
+
+      .preloader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .preloader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .preloader-text {
+        font-family: var(--font-geist);
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .preloader-count {
+        font-family: var(--font-space-mono);
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--foreground);
+        min-width: 8rem;
+        text-align: center;
+      }
+
+      .cup-icon {
+        width: 60px;
+        height: 80px;
+        border: 2px solid var(--foreground);
+        border-radius: 4px 4px 0 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cup-icon::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, var(--coffee-deep) 0%, var(--coffee-crema) 100%);
+        height: var(--fill, 0%);
+        transition: height 0.3s ease;
+        width: 100%;
+      }
+
+      .cup-icon::after {
+        content: "";
+        position: absolute;
+        top: var(--fill, 0%);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.1) 0%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        opacity: 0.3;
+      }
+
+      /* ====== TEXT REVEAL ANIMATIONS ====== */
+      .reveal-line {
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .reveal-line span {
+        display: block;
+        animation: slideUp 900ms var(--ease-entrance) both;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .reveal-word {
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .reveal-word span {
+        display: inline-block;
+        animation: slideUpWord 650ms var(--ease-entrance) both;
+      }
+
+      @keyframes slideUpWord {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* ====== DIGIT ROLL ANIMATIONS ====== */
+      .digit-counter {
+        font-family: var(--font-space-mono);
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        min-width: 2em;
+        text-align: center;
+      }
+
+      .digit-counter .value {
+        display: block;
+        animation: digitRoll 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+
+      @keyframes digitRoll {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* ====== SCROLL TRIGGER ANIMATIONS ====== */
+      .scroll-trigger {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 700ms var(--ease-entrance),
+          transform 700ms var(--ease-entrance);
+      }
+
+      .scroll-trigger.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .swirl-fill {
+        position: absolute;
+        bottom: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(
+          ellipse at 30% 70%,
+          rgba(255, 255, 255, 0.15) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 2s ease-out;
+        pointer-events: none;
+      }
+
+      .swirl-fill.active {
+        opacity: 1;
+      }
+
+      /* ====== CLOCK ROTATION ====== */
+      .locations-dial {
+        animation: none;
+      }
+
+      .locations-dial.scrolling {
+        animation: clockTurn linear forwards;
+      }
+
+      @keyframes clockTurn {
+        from {
+          transform: rotateZ(0deg);
+        }
+        to {
+          transform: rotateZ(38deg);
+        }
+      }
+
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 768px) {
+        header {
+          padding: 0 1rem;
+          height: 3rem;
+        }
+
+        .header-nav {
+          gap: 1rem;
+        }
+
+        .header-nav a {
+          font-size: 0.75rem;
+        }
+
+        .hero-headline {
+          font-size: var(--font-size-display-phone);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header id="header">
+      <div class="header-logo">brewns</div>
+      <nav class="header-nav">
+        <a href="#shop">Shop</a>
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#locations">Locations</a>
+        <a href="#order">
+          ORDER ONLINE
+          <span class="pulse-dot"></span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-content">
+        <div class="preloader-text">// Now Brewing</div>
+        <div class="preloader-count" id="preloader-count">000</div>
+        <div class="cup-icon" id="cup-icon"></div>
+      </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" data-header-theme="dark">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">// Specialty</div>
+          <h1 class="hero-headline">COFFEE FOR YOUR MOMENT</h1>
+          <p class="hero-lede">
+            Carefully sourced beans and thoughtfully brewed to bring out the best in every cup.
+          </p>
+          <a href="#menu" class="hero-cta">Explore Menu</a>
+        </div>
+
+        <div class="hero-product-frame" id="hero-product-mount">
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-family: var(--font-space-mono);
+              font-size: 0.75rem;
+              color: rgba(255, 255, 255, 0.3);
+            "
+          >
+            [3D Product - Three.js Canvas]
+          </div>
+        </div>
+
+        <div class="hero-info">
+          <div class="hero-info-item">
+            <div>OPEN DAILY</div>
+            <div>07:00 - 21:00</div>
+          </div>
+          <div class="hero-info-item">
+            <div>139 COFFEE STREET</div>
+            <div>SAN FRANCISCO, CA</div>
+          </div>
+          <div class="hero-info-item">
+            <div>INSTAGRAM</div>
+            <div>TIKTOK</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" data-header-theme="light">
+      <div class="menu-intro scroll-trigger">
+        <h2 class="menu-heading">OUR MENU</h2>
+        <p class="menu-lede">
+          Quality ingredients, carefully prepared. Simple, balanced and made to enjoy.
+        </p>
+      </div>
+
+      <div class="menu-cards">
+        <div class="menu-card">
+          <div class="menu-card-image">[Image: Espresso]</div>
+          <div class="menu-card-content">
+            <div class="menu-card-label">// in the cup</div>
+            <h3 class="menu-card-name">Espresso</h3>
+            <div class="menu-card-price">$2.50</div>
+            <div class="menu-card-details">1 OZ • SINGLE SHOT • DAILY</div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-image">[Image: Latte]</div>
+          <div class="menu-card-content">
+            <div class="menu-card-label">// in the cup</div>
+            <h3 class="menu-card-name">Latte</h3>
+            <div class="menu-card-price">$4.20</div>
+            <div class="menu-card-details">12 OZ • MILK • DAILY</div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-image">[Image: Iced Coffee]</div>
+          <div class="menu-card-content">
+            <div class="menu-card-label">// in the cup</div>
+            <h3 class="menu-card-name">Iced Coffee</h3>
+            <div class="menu-card-price">$4.50</div>
+            <div class="menu-card-details">12 OZ • COLD • DAILY</div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-image">[Image: Cinnamon Roll]</div>
+          <div class="menu-card-content">
+            <div class="menu-card-label">// pastry</div>
+            <h3 class="menu-card-name">Cinnamon Roll</h3>
+            <div class="menu-card-price">$3.80</div>
+            <div class="menu-card-details">FRESH • BAKED DAILY</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem">
+        <a href="#menu" class="hero-cta">View Full Menu</a>
+      </div>
+    </section>
+
+    <!-- LOCATIONS SECTION -->
+    <section id="locations" data-header-theme="light">
+      <h2 class="locations-heading">OUR LOCATIONS</h2>
+
+      <div class="locations-dial">
+        <span
+          style="
+            font-family: var(--font-space-mono);
+            font-size: 0.75rem;
+            color: rgba(23, 23, 21, 0.5);
+          "
+          >[Clock Dial - Three.js Canvas]</span
+        >
+      </div>
+
+      <div class="locations-info">
+        <div class="locations-list">
+          <div class="location-item">139 Coffee Street, San Francisco, CA</div>
+          <div class="location-item">310 Valencia Street, San Francisco, CA</div>
+          <div class="location-item">56 Columbus Avenue, San Francisco, CA</div>
+        </div>
+        <div
+          style="
+            margin-top: 2rem;
+            font-family: var(--font-space-mono);
+            font-size: 0.875rem;
+            letter-spacing: var(--letter-spacing-label);
+            text-transform: uppercase;
+          "
+        >
+          OPEN DAILY<br />07:00 - 21:00
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY SECTION -->
+    <section id="philosophy" data-header-theme="dark">
+      <div class="philosophy-content">
+        <h2 class="philosophy-headline">
+          THE CITY NEVER STOPS. YOUR COFFEE SHOULDN'T SLOW YOU DOWN.
+        </h2>
+
+        <p class="philosophy-lede">
+          Stay for a conversation or leave with the cup in your hand — both work, neither takes any
+          effort. Nothing here is rushed, and nothing keeps you longer than you meant to stay.
+        </p>
+
+        <div class="philosophy-claims">
+          Good coffee.<br />
+          NO CEREMONY.<br />
+          NO WAITING.
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section id="order" data-header-theme="dark">
+      <div class="order-content">
+        <h2 class="order-headline">COFFEE FOR RIGHT NOW</h2>
+        <p class="order-note">
+          We handle the craft. You handle the day.<br />
+          Order ahead and your cup is poured to meet you, not to sit waiting.
+        </p>
+        <a href="https://order.brewns.coffee" class="order-cta">Order Now</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Shop</h3>
+          <a href="#">Coffee</a>
+          <a href="#">Subscriptions</a>
+          <a href="#">Merch</a>
+          <a href="#">Gift Cards</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Menu</h3>
+          <a href="#">Coffee</a>
+          <a href="#">Non-Coffee</a>
+          <a href="#">Signature Drinks</a>
+          <a href="#">Food</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>About Us</h3>
+          <a href="#">Our Story</a>
+          <a href="#">Coffee & Sourcing</a>
+          <a href="#">Journal</a>
+          <a href="#">Careers</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <a href="mailto:hello@brewns.coffee">hello@brewns.coffee</a>
+          <a href="tel:+14151234567">(415) 123-4567</a>
+          <a href="#">Instagram</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2026 BREWNS COFFEE HOUSE<br />
+          <a href="#" style="color: inherit">Privacy Policy</a> /
+          <a href="#" style="color: inherit">Terms of Use</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- LENIS & THREE.JS -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+          "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import Lenis from "lenis";
+
+      // ====== PAGE READY STORE ======
+      const pageReadyStore = {
+        revealing: false,
+        ready: false,
+        listeners: [],
+      };
+
+      const setPageReady = (key, value) => {
+        pageReadyStore[key] = value;
+        pageReadyStore.listeners.forEach((cb) => cb({ ...pageReadyStore }));
+      };
+
+      // ====== LENIS SMOOTH SCROLL ======
+      const lenis = new Lenis({
+        smoothWheel: true,
+        lerp: 0.1,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+
+      window.lenis = lenis;
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+
+      // ====== PRELOADER ======
+      const preloader = document.getElementById("preloader");
+      const preloaderCount = document.getElementById("preloader-count");
+      const cupIcon = document.getElementById("cup-icon");
+
+      let level = 0;
+      let pour = 0;
+      const STEP = { mount: 0.1, fonts: 0.6, loaded: 1 };
+      const MIN_VISIBLE = 620;
+      const MAX_WAIT = 4000;
+      const HOLD = 180;
+
+      // Spring configs
+      const springConfigs = {
+        tight: { tension: 120, friction: 26 },
+        normal: { tension: 90, friction: 18 },
+      };
+
+      // Simple spring solver
+      const createSpring = (from, to, config) => {
+        let x = from;
+        let v = 0;
+        const { tension, friction } = config;
+
+        return {
+          update: (target) => {
+            const force = -tension * 1e-6 * (x - target);
+            const damping = -friction * 1e-3 * v;
+            v += force + damping;
+            x += v;
+            return x;
+          },
+          get value() {
+            return x;
+          },
+          set value(val) {
+            x = val;
+          },
+        };
+      };
+
+      let levelSpring = createSpring(0.1, 0.1, springConfigs.tight);
+      let pourSpring = createSpring(0, 0, springConfigs.normal);
+
+      const updatePreloader = () => {
+        const newLevel = Math.min(1, Math.max(0, level));
+        levelSpring.update(newLevel);
+        const count = String(Math.round(levelSpring.value * 100)).padStart(3, "0");
+        preloaderCount.textContent = count;
+
+        // Update cup fill
+        const fillPercent = levelSpring.value * (1 - pourSpring.value) * 80;
+        cupIcon.style.setProperty("--fill", fillPercent + "%");
+
+        if (level < 1) {
+          requestAnimationFrame(updatePreloader);
+        }
+      };
+
+      // Start preloader sequence
+      lenis.stop();
+      level = STEP.mount;
+      updatePreloader();
+
+      // Wait for fonts
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          level = Math.max(level, STEP.fonts);
+        });
+      }
+
+      // Wait for page load
+      let loadStart = performance.now();
+      const finishPreloader = () => {
+        level = STEP.loaded;
+
+        setTimeout(() => {
+          setPageReady("revealing", true);
+          pourSpring = createSpring(0, 1, springConfigs.normal);
+
+          // Animate pour
+          const pourLoop = () => {
+            pourSpring.update(1);
+            if (pourSpring.value < 0.99) {
+              requestAnimationFrame(pourLoop);
+            } else {
+              preloader.style.opacity = "0";
+              preloader.style.pointerEvents = "none";
+              preloader.style.transition = "opacity 600ms ease-out";
+              setPageReady("ready", true);
+              lenis.start();
+
+              // Trigger text reveals and other animations
+              triggerInitialAnimations();
+            }
+          };
+          pourLoop();
+        }, HOLD);
+      };
+
+      if (document.readyState === "complete") {
+        finishPreloader();
+      } else {
+        window.addEventListener("load", finishPreloader);
+        setTimeout(() => {
+          if (!pageReadyStore.ready) finishPreloader();
+        }, MAX_WAIT);
+      }
+
+      // ====== HEADER RECOLORING ======
+      const header = document.getElementById("header");
+      const sections = document.querySelectorAll("section[data-header-theme]");
+
+      const updateHeaderTheme = () => {
+        const headerY = 35;
+
+        let currentTheme = "dark";
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= headerY && rect.bottom > headerY) {
+            currentTheme = section.dataset.headerTheme || "dark";
+          }
+        });
+
+        if (currentTheme === "light") {
+          header.style.color = "#070707";
+        } else {
+          header.style.color = "#ffffff";
+        }
+      };
+
+      window.addEventListener("scroll", updateHeaderTheme);
+      updateHeaderTheme();
+
+      // ====== POINTER LEAN ANIMATIONS ======
+      const setupPointerLean = () => {
+        const menuCards = document.querySelectorAll(".menu-card");
+        const locationsDial = document.querySelector(".locations-dial");
+
+        menuCards.forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((centerY - y) / centerY) * 5;
+
+            card.classList.add("leaning");
+            card.style.setProperty("--lean-x", rotateX + "deg");
+            card.style.setProperty("--lean-y", rotateY + "deg");
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.classList.remove("leaning");
+          });
+        });
+
+        // Locations dial lean
+        if (locationsDial) {
+          document.addEventListener("mousemove", (e) => {
+            const rect = locationsDial.getBoundingClientRect();
+            const centerX = window.innerWidth / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distX = (e.clientX - centerX) / 100;
+            const distY = (e.clientY - centerY) / 100;
+
+            const rotate = Math.atan2(distY, distX) * (180 / Math.PI);
+            locationsDial.style.transform = `perspective(1000px) rotateX(${distY * 0.5}deg) rotateY(${distX * 0.5}deg)`;
+          });
+        }
+      };
+
+      // ====== TEXT REVEAL ANIMATIONS ======
+      const setupTextReveals = () => {
+        const headlines = document.querySelectorAll(
+          ".hero-headline, .menu-heading, .locations-heading, .philosophy-headline, .order-headline",
+        );
+
+        headlines.forEach((headline) => {
+          const text = headline.textContent;
+          const words = text.split(" ");
+
+          headline.innerHTML = words
+            .map((word) => {
+              return (
+                '<span class="reveal-line"><span>' +
+                word.split("").join("</span><span>") +
+                "</span></span>"
+              );
+            })
+            .join(" ");
+
+          // Stagger animation
+          const chars = headline.querySelectorAll(".reveal-line span span");
+          chars.forEach((char, index) => {
+            char.style.animationDelay = index * 0.05 + "ms";
+          });
+        });
+      };
+
+      // ====== DIGIT ROLL ANIMATIONS ======
+      const animateDigitCounter = (element, target, duration = 1200) => {
+        const start = 0;
+        const startTime = performance.now();
+
+        const update = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const current = Math.floor(start + (target - start) * progress);
+
+          element.textContent = String(current).padStart(3, "0");
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        };
+
+        requestAnimationFrame(update);
+      };
+
+      // ====== SCROLL TRIGGER ANIMATIONS ======
+      const setupScrollTriggers = () => {
+        const observerOptions = {
+          threshold: 0.3,
+          rootMargin: "0px 0px -100px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        // Observe all scroll trigger elements
+        document.querySelectorAll(".scroll-trigger").forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Animate swirl fills
+        const menuCards = document.querySelectorAll(".menu-card");
+        menuCards.forEach((card) => {
+          const swirl = document.createElement("div");
+          swirl.className = "swirl-fill";
+          card.appendChild(swirl);
+
+          observer.observe(card);
+          const cardObserver = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                swirl.classList.add("active");
+              }, 100);
+              cardObserver.unobserve(card);
+            }
+          }, observerOptions);
+          cardObserver.observe(card);
+        });
+      };
+
+      // ====== SCROLL-TRIGGERED CLOCK ROTATION ======
+      const setupClockRotation = () => {
+        const locationsSection = document.querySelector("#locations");
+        const locationsDial = document.querySelector(".locations-dial");
+
+        if (!locationsSection || !locationsDial) return;
+
+        window.addEventListener("scroll", () => {
+          const rect = locationsSection.getBoundingClientRect();
+          const sectionProgress = Math.max(0, Math.min(1, 1 - rect.top / window.innerHeight));
+
+          if (sectionProgress > 0 && sectionProgress < 1) {
+            const rotation = sectionProgress * 38;
+            locationsDial.style.transform = `rotateZ(${rotation}deg)`;
+          }
+        });
+      };
+
+      // ====== OPALESCE WEBGL2 GRADIENT ======
+      const setupOpalescseGradient = () => {
+        // Fallback: Use CSS gradient instead of WebGL2
+        // WebGL2 would be used here for advanced iridescent effects
+        // but CSS gradient provides adequate visual effect for now
+      };
+
+      // ====== TRIGGER INITIAL ANIMATIONS ======
+      const triggerInitialAnimations = () => {
+        setupPointerLean();
+        setupTextReveals();
+        setupScrollTriggers();
+        setupClockRotation();
+        setupOpalescseGradient();
+        setupThreeJSScenes();
+
+        // Animate prices on visible
+        const menuPrices = document.querySelectorAll(".menu-card-price");
+        menuPrices.forEach((price) => {
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting && !price.dataset.animated) {
+                price.dataset.animated = "true";
+                const value = parseInt(price.textContent.replace("$", "")) * 100;
+                animateDigitCounter(price, value, 1200);
+                observer.unobserve(price);
+              }
+            },
+            { threshold: 0.5 },
+          );
+          observer.observe(price);
+        });
+      };
+
+      // ====== THREE.JS SCENES SETUP ======
+      const setupThreeJSScenes = async () => {
+        try {
+          const THREE = await import("three");
+
+          // Hero Product Scene
+          const heroMount = document.querySelector("#hero-product-mount");
+          if (heroMount && heroMount.querySelector("canvas") === null) {
+            const heroScene = new THREE.Scene();
+            const heroCamera = new THREE.PerspectiveCamera(
+              75,
+              heroMount.clientWidth / heroMount.clientHeight,
+              0.1,
+              1000,
+            );
+            const heroRenderer = new THREE.WebGLRenderer({
+              antialias: true,
+              alpha: true,
+              powerPreference: "high-performance",
+            });
+
+            heroRenderer.setSize(heroMount.clientWidth, heroMount.clientHeight);
+            heroRenderer.setClearColor(0x000000, 0);
+            heroRenderer.toneMappingExposure = 1;
+            heroMount.innerHTML = "";
+            heroMount.appendChild(heroRenderer.domElement);
+
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            heroScene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 5, 5);
+            heroScene.add(directionalLight);
+
+            // Create placeholder 3D object (cube for now)
+            const geometry = new THREE.BoxGeometry(1, 1.5, 0.5);
+            const material = new THREE.MeshStandardMaterial({
+              color: 0x8b6f47,
+              metalness: 0.2,
+              roughness: 0.8,
+            });
+            const cube = new THREE.Mesh(geometry, material);
+            heroScene.add(cube);
+
+            heroCamera.position.z = 2;
+
+            // Animation loop
+            const heroAnimate = () => {
+              cube.rotation.x += 0.003;
+              cube.rotation.y += 0.005;
+              heroRenderer.render(heroScene, heroCamera);
+              requestAnimationFrame(heroAnimate);
+            };
+            heroAnimate();
+
+            // Handle resize
+            window.addEventListener("resize", () => {
+              const width = heroMount.clientWidth;
+              const height = heroMount.clientHeight;
+              heroCamera.aspect = width / height;
+              heroCamera.updateProjectionMatrix();
+              heroRenderer.setSize(width, height);
+            });
+          }
+
+          // Philosophy Bean Field Scene
+          const philosophySection = document.querySelector("#philosophy");
+          if (philosophySection && philosophySection.querySelector("canvas") === null) {
+            // Create canvas for bean field
+            const beanCanvas = document.createElement("canvas");
+            beanCanvas.style.position = "absolute";
+            beanCanvas.style.bottom = "-5%";
+            beanCanvas.style.left = "-10%";
+            beanCanvas.style.width = "120%";
+            beanCanvas.style.height = "60%";
+            beanCanvas.style.opacity = "0.3";
+            beanCanvas.style.pointerEvents = "none";
+            beanCanvas.style.zIndex = "1";
+            philosophySection.style.position = "relative";
+            philosophySection.style.overflow = "hidden";
+            philosophySection.appendChild(beanCanvas);
+
+            const philosophyScene = new THREE.Scene();
+            const philosophyCamera = new THREE.PerspectiveCamera(
+              75,
+              beanCanvas.clientWidth / beanCanvas.clientHeight,
+              0.1,
+              1000,
+            );
+            const philosophyRenderer = new THREE.WebGLRenderer({
+              canvas: beanCanvas,
+              antialias: true,
+              alpha: true,
+              powerPreference: "high-performance",
+            });
+
+            philosophyRenderer.setSize(beanCanvas.clientWidth, beanCanvas.clientHeight);
+            philosophyRenderer.setClearColor(0x000000, 0);
+            philosophyRenderer.toneMappingExposure = 1;
+
+            // Add lights
+            const ambientLight2 = new THREE.AmbientLight(0xffffff, 0.4);
+            philosophyScene.add(ambientLight2);
+
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight2.position.set(5, 5, 5);
+            philosophyScene.add(directionalLight2);
+
+            // Create bean particles (spheres)
+            const beanGroup = new THREE.Group();
+            const beanGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+            const beanMaterial = new THREE.MeshStandardMaterial({
+              color: 0x6b4423,
+              metalness: 0.1,
+              roughness: 0.9,
+            });
+
+            // Create 34 beans for desktop, 16 for mobile
+            const beanCount = window.innerWidth > 768 ? 34 : 16;
+            const beans = [];
+
+            for (let i = 0; i < beanCount; i++) {
+              const bean = new THREE.Mesh(beanGeometry, beanMaterial);
+              bean.position.set(
+                (Math.random() - 0.5) * 8,
+                (Math.random() - 0.5) * 6,
+                Math.random() * 2 - 1,
+              );
+              bean.scale.set(
+                0.8 + Math.random() * 0.4,
+                1 + Math.random() * 0.3,
+                0.8 + Math.random() * 0.4,
+              );
+              bean.rotation.set(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+              );
+              beanGroup.add(bean);
+              beans.push({
+                mesh: bean,
+                vx: (Math.random() - 0.5) * 0.02,
+                vy: (Math.random() - 0.5) * 0.02,
+                vz: (Math.random() - 0.5) * 0.02,
+              });
+            }
+
+            philosophyScene.add(beanGroup);
+            philosophyCamera.position.z = 5;
+
+            // Philosophy animation loop
+            const philosophyAnimate = () => {
+              beanGroup.rotation.z += 0.0005;
+
+              beans.forEach((bean) => {
+                bean.mesh.position.x += bean.vx;
+                bean.mesh.position.y += bean.vy;
+                bean.mesh.position.z += bean.vz;
+
+                // Boundaries
+                if (Math.abs(bean.mesh.position.x) > 4) bean.vx *= -1;
+                if (Math.abs(bean.mesh.position.y) > 3) bean.vy *= -1;
+                if (Math.abs(bean.mesh.position.z) > 1) bean.vz *= -1;
+
+                bean.mesh.rotation.x += bean.vx * 0.5;
+                bean.mesh.rotation.y += bean.vy * 0.5;
+              });
+
+              philosophyRenderer.render(philosophyScene, philosophyCamera);
+              requestAnimationFrame(philosophyAnimate);
+            };
+            philosophyAnimate();
+
+            // Handle resize
+            window.addEventListener("resize", () => {
+              const width = beanCanvas.clientWidth;
+              const height = beanCanvas.clientHeight;
+              philosophyCamera.aspect = width / height;
+              philosophyCamera.updateProjectionMatrix();
+              philosophyRenderer.setSize(width, height);
+            });
+          }
+        } catch (error) {
+          console.warn("Three.js not available:", error);
+        }
+      };
+
+      // ====== HANDLE REDUCED MOTION ======
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) {
+        setPageReady("revealing", true);
+        setPageReady("ready", true);
+        preloader.style.display = "none";
+        lenis.start();
+      }
+    </script>
+  </body>
+</html>
